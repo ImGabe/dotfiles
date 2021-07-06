@@ -158,7 +158,6 @@
       exercism
       tdesktop
       obsidian
-      notion
       nixpkgs-fmt
     ];
 
