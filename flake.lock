@@ -1,0 +1,93 @@
+{
+  "nodes": {
+  "home-manager": {
+  "inputs": {
+  "nixpkgs": "nixpkgs"
+  },
+  "locked": {
+  "lastModified": 1624214437,
+  "narHash": "sha256-BtB6k1mQXG/P8MUlNVcuboQqlxlks2H6i5vj2pbGa3Y=",
+  "owner": "nix-community",
+  "repo": "home-manager",
+  "rev": "cd11c02c286a996ff55010146baecae4c413634f",
+  "type": "github"
+  },
+  "original": {
+  "owner": "nix-community",
+  "repo": "home-manager",
+  "type": "github"
+  }
+  },
+  "nixpkgs": {
+  "locked": {
+  "lastModified": 1624313946,
+  "narHash": "sha256-YpHMu7lo2wE5jVe0USloaRIWANmiJwxrILfjP5An7lA=",
+  "owner": "NixOS",
+  "repo": "nixpkgs",
+  "rev": "9332bcad1813a87d7cd51e94dd9fd4a4aa11093c",
+  "type": "github"
+  },
+  "original": {
+  "id": "nixpkgs",
+  "type": "indirect"
+  }
+  },
+  "nixpkgs_2": {
+  "locked": {
+  "lastModified": 1624172050,
+  "narHash": "sha256-sLQEhZ6Ffjx0J1AJxHQDY4y7XWKxI/Zgm/hQJjkjZ6M=",
+  "owner": "nixos",
+  "repo": "nixpkgs",
+  "rev": "6613a30c5e3ee59753181512b4bedd4121569925",
+  "type": "github"
+  },
+  "original": {
+  "owner": "nixos",
+  "ref": "nixos-21.05",
+  "repo": "nixpkgs",
+  "type": "github"
+  }
+  },
+  "nur": {
+  "locked": {
+  "lastModified": 1624327025,
+  "narHash": "sha256-dBUVpcE6DyijEmFckdZTpeMs3esf5qezs/0/4XZZQlA=",
+  "owner": "nix-community",
+  "repo": "NUR",
+  "rev": "9913f8c07992ada0b56124366e1ee7966c105448",
+  "type": "github"
+  },
+  "original": {
+  "owner": "nix-community",
+  "repo": "NUR",
+  "type": "github"
+  }
+  },
+  "root": {
+  "inputs": {
+  "home-manager": "home-manager",
+  "nixpkgs": "nixpkgs_2",
+  "nur": "nur",
+  "unstable": "unstable"
+  }
+  },
+  "unstable": {
+  "locked": {
+  "lastModified": 1624024598,
+  "narHash": "sha256-X++38oH5MKEmPW4/2WdMaHQvwJzO8pJfbnzMD7DbG1E=",
+  "owner": "nixos",
+  "repo": "nixpkgs",
+  "rev": "33d42ad7cf2769ce6364ed4e52afa8e9d1439d58",
+  "type": "github"
+  },
+  "original": {
+  "owner": "nixos",
+  "ref": "nixos-unstable",
+  "repo": "nixpkgs",
+  "type": "github"
+  }
+  }
+  },
+  "root": "root",
+  "version": 7
+  }
