@@ -73,7 +73,10 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  # Enable redshit.
+  # Enable my location for redshift.
+  location.provider = "geoclue2";
+
+  # Enable redshift.
   services.redshift = {
     enable = true;
 
