@@ -73,10 +73,22 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  ## Enable dconf
-  # services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  # Enable redshit.
+  services.redshift = {
+    enable = true;
 
-  # Configure keymap in X11
+    brightness = {
+      day = "1";
+      night = "1";
+    };
+
+    temperature = {
+      day = 5500;
+      night = 3700;
+    };
+  };
+
+  # Configure keymap in X11.
   services.xserver.layout = "br";
   # services.xserver.xkbOptions = "eurosign:e";
 
@@ -87,10 +99,10 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # disable /tmpfs
+  # Disable /tmpfs.
   boot.tmpOnTmpfs = false;
 
-  # enable docker
+  # Enable docker.
   virtualisation.docker.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
