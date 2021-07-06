@@ -4,7 +4,6 @@
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.users.gabe = {
-    # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 
     programs = {
@@ -145,8 +144,6 @@
       };
     };
 
-    # Home Manager needs a bit of information about you and the
-    # paths it should manage.
     home.username = "gabe";
     home.homeDirectory = "/home/gabe";
     home.packages = with pkgs; [
