@@ -1,17 +1,18 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./modules/bash.nix
-    ./modules/git.nix
-    ./modules/redshift.nix
-  ];
-
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.users.gabe = {
     programs.home-manager.enable = true;
     programs = {
+
+      imports = [
+        ./modules/bash.nix
+        ./modules/git.nix
+        ./modules/redshift.nix
+      ];
+
       fzf = {
         enable = true;
         enableBashIntegration = true;
