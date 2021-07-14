@@ -2,6 +2,8 @@
 
 {
   programs.firefox = {
+    enable = true;
+
     profiles.gabe = {
       settings = {
         # https://wiki.archlinux.org/title/Firefox#Hardware_video_acceleration
