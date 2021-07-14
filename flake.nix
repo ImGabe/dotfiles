@@ -8,21 +8,21 @@
   };
 
   outputs = { self, home-manager, nur, nixpkgs, ... }@inputs: {
-      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        modules = [
-          {
-            nixpkgs.overlays = [
-              nur.overlay
-            ];
-          }
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem rec {
+      system = "x86_64-linux";
+      modules = [
+        {
+          nixpkgs.overlays = [
+            nur.overlay
+          ];
+        }
 
-          ./configuration.nix
-          ./home-manager/home.nix
+        ./configuration.nix
+        ./home-manager/home.nix
 
-          home-manager.nixosModules.home-manager
-        ];
-        specialArgs = { inherit inputs system; };
-      };
+        home-manager.nixosModules.home-manager
+      ];
+      specialArgs = { inherit inputs system; };
     };
+  };
 }
