@@ -1,12 +1,15 @@
 { pkgs, ... }:
 
 {
+  location.provider = "geoclue2";
+
   services.redshift = {
     enable = true;
-    provider = "geoclue2";
 
-    brightness-day = "1";
-    brightness-night = "1";
+    brightness = {
+      day = "1";
+      night = "1";
+    };
 
     temperature = {
       day = 5500;
