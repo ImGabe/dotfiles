@@ -7,8 +7,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../nixos/user.nix
-    ../nixos/nix.nix
+    ./nixos/user.nix
+    ./nixos/nix.nix
   ];
 
   # Allow unfree packages.
