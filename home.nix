@@ -148,6 +148,7 @@
       exercism
       tdesktop
       obsidian
+      insomnia
       nixpkgs-fmt
     ];
 
