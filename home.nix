@@ -143,7 +143,6 @@
     home.packages = with pkgs; [
       mpv
       steam
-      chromium
       discord
       spotify
       exercism
