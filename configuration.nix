@@ -6,23 +6,10 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../nixos/user.nix
+    ../../nixos/nix.nix
   ];
-
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 2d";
-    };
-
-    autoOptimiseStore = true;
-  };
 
   # Allow unfree packages.
   nixpkgs.config.allowUnfree = true;
@@ -98,9 +85,23 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # Enable sound with PipeWire
+  # sound.enable = false;
+  security.rtkit.enable = true;
+  hardware.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
 
   # Disable /tmpfs.
   boot.tmpOnTmpfs = false;
@@ -110,12 +111,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.gabe = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ and Docker for the user.
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
