@@ -19,15 +19,6 @@
     home.username = "gabe";
     home.homeDirectory = "/home/gabe";
     home.packages = with pkgs; [
-      mpv
-      steam
-      chromium
-      discord
-      spotify
-      exercism
-      tdesktop
-      obsidian
-      insomnia
       nixpkgs-fmt
     ];
 
