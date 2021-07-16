@@ -1,14 +1,15 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  baseconfig = { allowUnfree = true; };
+  unstable = import <nixos-unstable> { config = baseconfig; };
+in
 {
   imports = [
     ./hardware-configuration.nix
     ./nixos/user.nix
     ./nixos/nix.nix
   ];
-
-  # Allow unfree packages.
-  nixpkgs.config.allowUnfree = true;
 
   # Support hardware 32 bits.
   hardware.opengl.driSupport32Bit = true;
@@ -19,13 +20,12 @@
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.device = "/dev/sda";
 
-  # Hostname
-  networking.hostName = "gxbe";
-
   # Time Zone.
   time.timeZone = "America/Sao_Paulo";
 
-  #
+  # Hostname.
+  networking.hostName = "gxbe";
+  networking.networkmanager.enable = true;
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;
 
@@ -46,6 +46,12 @@
   # Configure keymap in X11.
   services.xserver.layout = "br";
 
+  nixpkgs.config = baseconfig // {
+    packageOverrides = pkgs: {
+      pipewire = unstable.pipewire;
+    };
+  };
+
   # Enable sound with PipeWire.
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
@@ -54,6 +60,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   # 
