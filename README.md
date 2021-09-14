@@ -2,9 +2,10 @@
 
 Usage:
 ```bash
-# Clone repository
-$ git clone <link>
+  # Clone repository
+  $ git
+  clone <link>
 
-# Run the file
-$ ./rebuild
+  # Run the file
+  $ ./rebuild
 ```

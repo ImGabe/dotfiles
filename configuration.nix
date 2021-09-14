@@ -1,18 +1,13 @@
 { config, pkgs, lib, ... }:
 
-let
-  baseconfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseconfig; };
-in
 {
   imports = [
     ./hardware-configuration.nix
+    ./desktop/i3
+    # ./desktop/gnome
     ./nixos/user.nix
     ./nixos/nix.nix
   ];
-
-  # Support hardware 32 bits.
-  hardware.opengl.driSupport32Bit = true;
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -36,43 +31,42 @@ in
     keyMap = "br-abnt2";
   };
 
+  fonts.fonts = with pkgs; [
+    nerdfonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    mplus-outline-fonts
+    dina-font
+    proggyfonts
+    hasklig
+    siji
+  ];
+
+  # Enable unfree packages.
+  nixpkgs.config.allowUnfree = true;
+
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
   # Enable Nvidia drivers.
-  services.xserver.videoDrivers = [ "nvidia" ];
-  # Enable the GNOME 3 Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.videoDrivers = [ "n" ];
+
   # Configure keymap in X11.
   services.xserver.layout = "br";
 
-  nixpkgs.config = baseconfig // {
-    packageOverrides = pkgs: {
-      pipewire = unstable.pipewire;
-    };
-  };
+  # Configure Wacom.
+  services.xserver.wacom.enable = true;
 
-  # Enable sound with PipeWire.
-  security.rtkit.enable = true;
-  hardware.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
-  # 
-  location.provider = "geoclue2";
-
-  # Disable /tmpfs.
-  boot.tmpOnTmpfs = false;
-
-  # Enable docker.
-  virtualisation.docker.enable = true;
+  # Enable supoort for 32 bits.
+  hardware.opengl.driSupport32Bit = true;
 
   # System version.
   system.stateVersion = "21.05";
+
 }
 

@@ -7,11 +7,13 @@
     imports = [
       ./modules/bash.nix
       ./modules/direnv.nix
-      ./modules/firefox.nix
       ./modules/fzf.nix
       ./modules/git.nix
-      ./modules/redshift.nix
       ./modules/vscode.nix
+      ./modules/firefox
+      ./modules/starship
+      ./modules/nvim
+      ./modules/spicetify
     ];
 
     programs.home-manager.enable = true;
@@ -19,6 +21,17 @@
     home.username = "gabe";
     home.homeDirectory = "/home/gabe";
     home.packages = with pkgs; [
+      steam
+      tdesktop
+      discord
+      obsidian
+      ffmpeg
+      qbittorrent
+      krita
+      mypaint
+      feh
+      chromium
+      noisetorch
       nixpkgs-fmt
     ];
 
