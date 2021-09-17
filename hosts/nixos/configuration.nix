@@ -3,10 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./desktop/i3
-    # ./desktop/gnome
-    ./nixos/user.nix
-    ./nixos/nix.nix
+    ../../desktop/i3
   ];
 
   # Use the GRUB 2 boot loader.
@@ -31,6 +28,7 @@
     keyMap = "br-abnt2";
   };
 
+  # Fonts
   fonts.fonts = with pkgs; [
     nerdfonts
     noto-fonts
@@ -44,13 +42,28 @@
     siji
   ];
 
+  # Nix 
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 2d";
+    };
+
+    autoOptimiseStore = true;
+  };
+
   # Enable unfree packages.
   nixpkgs.config.allowUnfree = true;
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
   # Enable Nvidia drivers.
-  services.xserver.videoDrivers = [ "n" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Configure keymap in X11.
   services.xserver.layout = "br";
@@ -64,6 +77,14 @@
 
   # Enable supoort for 32 bits.
   hardware.opengl.driSupport32Bit = true;
+
+  # User
+  users.users.gabe = {
+    isNormalUser = true;
+    uid = 1000;
+    extraGroups = [ "wheel" "docker" ];
+    password = "...";
+  };
 
   # System version.
   system.stateVersion = "21.05";

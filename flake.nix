@@ -8,6 +8,7 @@
   };
 
   outputs = { self, home-manager, nur, nixpkgs, ... }@inputs: {
+    # NixOS
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       modules = [
@@ -17,12 +18,20 @@
           ];
         }
 
-        ./configuration.nix
-        ./home-manager/home.nix
+        ./hosts/nixos/configuration.nix
+        ./hosts/nixos/home.nix
 
         home-manager.nixosModules.home-manager
       ];
       specialArgs = { inherit inputs system; };
+    };
+
+    # Non-NixOS
+    homeConfigurations.elementary = home-manager.lib.homeManagerConfiguration {
+      configuration = ./hosts/elementary;
+      system = "x86_64-linux";
+      homeDirectory = "/home/gabe";
+      username = "gabe";
     };
   };
 }

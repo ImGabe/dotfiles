@@ -5,15 +5,15 @@
   home-manager.useGlobalPkgs = true;
   home-manager.users.gabe = {
     imports = [
-      ./modules/bash.nix
-      ./modules/direnv.nix
-      ./modules/fzf.nix
-      ./modules/git.nix
-      ./modules/vscode.nix
-      ./modules/firefox
-      ./modules/starship
-      ./modules/nvim
-      ./modules/spicetify
+      ../../pkgs/bash.nix
+      ../../pkgs/direnv.nix
+      ../../pkgs/fzf.nix
+      ../../pkgs/git.nix
+      ../../pkgs/vscode.nix
+      ../../pkgs/firefox
+      ../../pkgs/starship
+      ../../pkgs/nvim
+      ../../pkgs/spicetify
     ];
 
     programs.home-manager.enable = true;
