@@ -20,15 +20,15 @@
   home-manager.users.gabe = {
     imports = [
       ## alacritty
-      ./../../home-manager/modules/alacritty # terminal
+      ./../../pkgs/alacritty # terminal
       ## rofi
-      ./../../home-manager/modules/rofi # launcher
+      ./../../pkgs/rofi # launcher
       ## polybar (TO-DO)
-      ./../../home-manager/modules/polybar # bar
+      ./../../pkgs/polybar # bar
       ## dunst
-      ./../../home-manager/modules/dunst # notification
+      ./../../pkgs/dunst # notification
       ## compton
-      ./../../home-manager/modules/compton # shadown effect
+      ./../../pkgs/compton # shadown effect
     ];
 
     home.packages = with pkgs; [ flashfocus xclip maim killall ]; # https://github.com/fennerm/flashfocus

@@ -11,17 +11,17 @@
   home-manager.users.gabe = {
     imports = [
       ## terminal
-      # ./../../home-manager/modules/urxvt
-      ./../../home-manager/modules/alacritty
+      # ./../../pkgs/urxvt
+      ./../../pkgs/alacritty
 
       ## notification
-      ./../../home-manager/modules/dunst
+      ./../../pkgs/dunst
 
       ## bar
-      ./../../home-manager/modules/lemonbar
+      ./../../pkgs/lemonbar
 
       ## input
-      ./../../home-manager/modules/sxhkd.nix
+      ./../../pkgs/sxhkd.nix
     ];
 
     home.file = {
