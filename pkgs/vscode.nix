@@ -28,41 +28,34 @@
 
     extensions = with pkgs.vscode-extensions;
       [
-        # Theme
+        ## Themes
         github.github-vscode-theme
-        # arcticicestudio.nord-visual-studio-code
+        arcticicestudio.nord-visual-studio-code
 
-        # Icons
+        ## Icons
         file-icons.file-icons
 
-        # Git
+        ## Git
         eamodio.gitlens
 
-        # Docker
+        ## Docker
         ms-azuretools.vscode-docker
 
-        # Nix
+        ## Nix
         jnoortheen.nix-ide
 
-        # Javascript
+        ## Javascript
         dbaeumer.vscode-eslint
 
-        # Go
-        golang.Go
+        ## Go
+        golang.go
 
-        # Rust
+        ## Rust
         matklad.rust-analyzer
 
-        # Markdown
+        ## Markdown
         yzhang.markdown-all-in-one
 
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "rescript-vscode";
-          publisher = "chenglou92";
-          version = "1.1.3";
-          sha256 = "Siyg1d1vFyvFtogn+OXledCSZUEbZGjpHgo4UF+/MbA=";
-        }
       ];
   };
 }
