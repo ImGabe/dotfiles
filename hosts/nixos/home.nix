@@ -13,7 +13,7 @@
       ../../pkgs/firefox
       ../../pkgs/starship
       ../../pkgs/nvim
-      ../../pkgs/spicetify
+      # ../../pkgs/spicetify
     ];
 
     programs.home-manager.enable = true;
@@ -28,10 +28,13 @@
       ffmpeg
       qbittorrent
       krita
-      mypaint
+      insomnia
+      ranger
+      vlc
+      git
       feh
+      spotify
       chromium
-      noisetorch
       nixpkgs-fmt
     ];
 
