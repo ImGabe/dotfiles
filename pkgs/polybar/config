@@ -12,98 +12,57 @@ notify = #EBCB8B
 success = #A3BE8C
 function = #B48EAD
 
-[bar/base]
-dpi = 100
+[bar/bar]
 monitor = "HDMI-1"
-fixed-center = true
-override-redirect = true
+
+width = 100%
+height = 25
+
 line-size= 3
+
 background = ${colors.background}
 foreground = ${colors.foreground}
+
 font-0 = "Hasklug Nerd Font:size=9"
 
-[bar/top-left]
-inherit = bar/base
-
-width = 18%
-height = 3%
-
-offset-x = 18
-offset-y = 5
-
-radius = 8
-
-modules-center = i3
-
-[bar/top-center]
-inherit = bar/base
-enable-ipc = true
-
-width = 30%
-height = 3%
-
-offset-x = 35%
-offset-y = 5
-
-radius = 8
-
-modules-center = spotify spotify-prev spotify-play-pause spotify-next
-
-[bar/top-right]
-inherit = bar/base
-
-offset-x = 78%
-offset-y = 5
-
-width = 20%
-height = 3%
-
-radius = 8
-
-modules-center = alsa cpu memory date
+modules-left = i3
+modules-center =
+modules-right = alsa cpu memory date powermenu
 
 [module/i3]
 type = internal/i3
 
-format = <label-state> <label-mode>
-
-; color
-label-focused = 
-label-focused-underline = ${colors.nord7}
+label-focused = %index%
 label-focused-foreground = ${colors.nord7}
-label-focused-padding = 1
+label-focused-padding = 2
 
-label-unfocused = 
-label-unfocused-foreground = ${colors.nord9}
-label-unfocused-padding = 1
+label-unfocused = %index%
+label-unfocused-padding = 2
 
-label-urgent = 
+label-visible = %index%
+label-visible-foreground = ${colors.function}
+label-visible-padding = 2
+
+label-urgent = %index%
 label-urgent-foreground = ${colors.urgent}
-label-urgent-background = ${colors.foreground}
-label-urgent-padding = 1
-
-; seperator
-;label-separator = | 
-;label-separator-foreground = ${colors.buffer}
+label-urgent-padding = 2
 
 [module/date]
 type = internal/date
 
-date =
-date-alt = %A, %d %B %Y
-
 time = %H:%M
-time-alt =
+time-alt = %I:%M %p
 
-label = %date%%time%
-label-font = 3
-
-format = <label>
+format =  <label>
 format-padding = 1
+format-foreground = ${colors.nord7}
+
+label = %time%
+label-foreground = ${colors.foreground}
+
 
 [module/cpu]
 type = internal/cpu
-interval = 1
 
 format = <ramp-load> <label>
 format-padding = 1
@@ -114,8 +73,10 @@ ramp-load-0-foreground = ${colors.success}
 ramp-load-1 = 
 ramp-load-1-foreground = ${colors.warning}
 
+
 ramp-load-2 = 
 ramp-load-2-foreground = ${colors.urgent}
+
 
 [module/memory]
 type = internal/memory
@@ -135,15 +96,6 @@ ramp-used-2 = 
 ramp-used-2-foreground = ${colors.urgent}
 
 
-[module/show-desktop]
-type = custom/text
-
-content =  
-content-padding = 2
-
-
-click-left = i3-msg workspace 25:Desktop
-
 [module/powermenu]
 type = custom/menu
 
@@ -151,42 +103,42 @@ expand-center = true
 
 label-open = 
 label-open-foreground = ${colors.urgent}
-label-open-padding = 1
+label-open-padding = 2
+
 label-close = 
 label-close-foreground = ${colors.background}
 label-close-background = ${colors.nord9}
-label-close-padding = 1
+label-close-padding = 2
 
 menu-0-0 = 
 menu-0-0-foreground = ${colors.urgent}
 menu-0-0-background = ${colors.background}
-menu-0-0-padding = 1
+menu-0-0-padding = 2
 menu-0-0-exec = shutdown
 
 menu-0-1 = 
 menu-0-1-foreground = ${colors.warning}
 menu-0-1-background = ${colors.background}
-menu-0-1-padding = 1
+menu-0-1-padding = 2
 menu-0-1-exec = reboot
 
 menu-0-2 = 
 menu-0-2-foreground = ${colors.warning}
 menu-0-2-background = ${colors.background}
-menu-0-2-padding = 1
+menu-0-2-padding = 2
 menu-0-2-exec = systemctl suspend
 
 ; Icons
 layout-icon-default = 
 
+
 [module/alsa]
 type = internal/alsa
 
-; Format 
 format-volume = <ramp-volume> <label-volume>
-format-volume-underline = ${colors.function}
 format-volume-padding = 1
 
-label-muted =  muted
+label-muted =  muted
 label-muted-foreground = ${colors.urgent}
 label-muted-underline = ${colors.urgent}
 
@@ -200,36 +152,3 @@ ramp-volume-2-foreground = ${colors.urgent}
 ramp-headphones-0 = 
 
 ramp-volume-foreground = ${colors.nord7}
-
-[module/spotify]
-type = custom/script
-tail = true
-
-format-prefix = "阮 "
-format-prefix-foreground = ${colors.success}
-
-format = <label>
-
-exec = bash ~/.config/polybar/scroll_spotify_status.sh
-
-[module/spotify-prev]
-type = custom/script
-exec = echo "寧"
-format = <label>
-format-padding = 1
-click-left = playerctl previous spotify
-
-[module/spotify-play-pause]
-type = custom/ipc
-hook-0 = echo ""
-hook-1 = echo ""
-initial = 1
-format-padding = 1
-click-left = playerctl play-pause spotify
-
-[module/spotify-next]
-type = custom/script
-exec = echo "嶺"
-format = <label>
-format-padding = 1
-click-left = playerctl next spotify
