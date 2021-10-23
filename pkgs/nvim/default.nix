@@ -3,7 +3,9 @@
 {
   programs.neovim = {
     enable = true;
+
     viAlias = true;
+    vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [
       #theme
@@ -12,17 +14,6 @@
       # nerdtree
       nerdtree
       nerdtree-git-plugin
-
-      # vim-airline
-      vim-airline
-      vim-airline-themes
-
-      # idk
-      vim-autoformat
-      auto-pairs
-      YouCompleteMe
-      vim-gitgutter
-      auto-pairs
 
       # nix language
       vim-nix
