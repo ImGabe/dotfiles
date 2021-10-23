@@ -102,7 +102,7 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-
+set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -181,9 +181,8 @@ client.background       #2e3440
 
 for_window [class=".*"] border pixel 2.2
 
-gaps inner 8
-gaps outer 8
-gaps top 22
+gaps inner 6
+gaps outer 6
 
 smart_borders on
 smart_borders no_gaps
