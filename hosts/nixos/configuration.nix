@@ -60,8 +60,6 @@
   # Enable unfree packages.
   nixpkgs.config.allowUnfree = true;
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
   # Enable Nvidia drivers.
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -77,6 +75,9 @@
 
   # Enable supoort for 32 bits.
   hardware.opengl.driSupport32Bit = true;
+
+  # Enable Docker service.
+  virtualisation.docker.enable = true;
 
   # User
   users.users.gabe = {
