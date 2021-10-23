@@ -25,13 +25,5 @@
       ];
       specialArgs = { inherit inputs system; };
     };
-
-    # Non-NixOS
-    homeConfigurations.elementary = home-manager.lib.homeManagerConfiguration {
-      configuration = ./hosts/elementary;
-      system = "x86_64-linux";
-      homeDirectory = "/home/gabe";
-      username = "gabe";
-    };
   };
 }
