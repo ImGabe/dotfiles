@@ -28,7 +28,7 @@
       ## dunst
       ./../../pkgs/dunst # notification
       ## compton
-      ./../../pkgs/compton # shadown effect
+      ./../../pkgs/compton # shadow effect
     ];
 
     home.packages = with pkgs; [ flashfocus xclip maim killall ]; # https://github.com/fennerm/flashfocus
