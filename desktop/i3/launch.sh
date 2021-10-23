@@ -7,6 +7,4 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # execute a Polybar, usando a configuração padrão ~/.config/polybar/config
-polybar top-right &
-polybar top-center &
-polybar top-left &
+polybar bar &
