@@ -26,8 +26,8 @@ foreground = ${colors.foreground}
 font-0 = "Hasklug Nerd Font:size=9"
 
 modules-left = i3
-modules-center =
-modules-right = alsa cpu memory date powermenu
+modules-center = date
+modules-right = alsa cpu memory time powermenu
 
 [module/i3]
 type = internal/i3
@@ -47,7 +47,21 @@ label-urgent = %index%
 label-urgent-foreground = ${colors.urgent}
 label-urgent-padding = 2
 
+
 [module/date]
+type = internal/date
+
+date = %d.%m.%y
+date-alt = %A, %B
+
+format = <label>
+format-padding = 1
+
+label = %date%
+label-foreground = ${colors.foreground}
+
+
+[module/time]
 type = internal/date
 
 time = %H:%M
