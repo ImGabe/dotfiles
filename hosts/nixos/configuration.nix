@@ -69,6 +69,13 @@
   # Configure Wacom.
   services.xserver.wacom.enable = true;
 
+  # printing
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplipWithPlugin ];
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
