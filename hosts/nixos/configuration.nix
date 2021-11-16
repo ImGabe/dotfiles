@@ -51,7 +51,8 @@
 
     gc = {
       automatic = true;
-      options = "--delete-older-than 2d";
+      dates = "weekly";
+      options = "--delete-older-than 30d";
     };
 
     autoOptimiseStore = true;
@@ -86,11 +87,14 @@
   # Enable Docker service.
   virtualisation.docker.enable = true;
 
-  # User
+  # ADB enable.
+  programs.adb.enable = true;
+
+  # User config.
   users.users.gabe = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "adbusers" ];
     password = "...";
   };
 
