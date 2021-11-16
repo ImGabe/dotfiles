@@ -13,14 +13,14 @@
       };
     };
 
-    # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-    #   https-everywhere
-    #   privacy-badger
-    #   decentraleyes
-    #   link-cleaner
-    #   octotree
-    #   ublock-origin
-    #   bitwarden
-    # ];
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      https-everywhere
+      privacy-badger
+      decentraleyes
+      link-cleaner
+      octotree
+      ublock-origin
+      bitwarden
+    ];
   };
 }
