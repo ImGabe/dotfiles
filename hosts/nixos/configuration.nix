@@ -2,8 +2,25 @@
 
 {
   imports = [
+    # grub theme
+    ./grub/themes/fallout.nix
+
+    # picom
+    ./services/picom.nix
+    #redshift
+    ./services/redshift.nix
+    # priting
+    ./services/priting.nix
+    # wacom
+    ./services/wacom.nix
+
+    # nix
+    ./modules/nix.nix
+    # docker
+    ./modules/docker.nix
+
+    # hardware configuration
     ./hardware-configuration.nix
-    ../../desktop/i3
   ];
 
   # Use the GRUB 2 boot loader.
@@ -11,6 +28,9 @@
   boot.loader.grub.version = 2;
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.device = "/dev/sda";
+
+  # clear /tmp
+  boot.cleanTmpDir = true;
 
   # Time Zone.
   time.timeZone = "America/Sao_Paulo";
@@ -31,32 +51,15 @@
   # Fonts
   fonts.fonts = with pkgs; [
     nerdfonts
+
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+
+    hasklig
     liberation_ttf
     mplus-outline-fonts
-    dina-font
-    proggyfonts
-    hasklig
-    siji
   ];
-
-  # Nix 
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-
-    autoOptimiseStore = true;
-  };
 
   # Enable unfree packages.
   nixpkgs.config.allowUnfree = true;
@@ -64,37 +67,57 @@
   # Enable Nvidia drivers.
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # enable i3
+  services.xserver = {
+    enable = true;
+
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+    };
+
+    displayManager = {
+      lightdm.enable = true;
+      defaultSession = "none+i3";
+    };
+
+    desktopManager.xterm.enable = false;
+  };
+
   # Configure keymap in X11.
   services.xserver.layout = "br";
 
-  # Configure Wacom.
-  services.xserver.wacom.enable = true;
+  # Enable sound and pipewire.
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+  hardware.pulseaudio.enable = false;
 
-  # printing
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplipWithPlugin ];
-  services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  # For Vscode keyring.
+  services.gnome.gnome-keyring.enable = true;
 
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # Enable supoort for 32 bits.
+  # Enable Vulkan.
+  hardware.opengl.driSupport = true;
+  # Enable suport for 32 bits.
   hardware.opengl.driSupport32Bit = true;
 
-  # Enable Docker service.
-  virtualisation.docker.enable = true;
-
-  # ADB enable.
-  programs.adb.enable = true;
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = "org.pwmt.zathura.desktop";
+      "image/png" = "feh.desktop";
+    };
+  };
 
   # User config.
   users.users.gabe = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "docker" "adbusers" ];
+    extraGroups = [ "wheel" "docker" ];
     password = "...";
   };
 

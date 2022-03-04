@@ -1,53 +1,61 @@
 # dotfiles
 
-My NixOs and Home-Manager dotfiles.
+My [NixOs] and [Home Manager] dotfiles.
 
-[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
+![OS NixOS](https://img.shields.io/badge/os-nixos%20-%235277c3?style=flat-square&logoColor=7eb5e0)
+![Shell Bash](https://img.shields.io/badge/editor-neovim%20|%20vscode-%23464748?style=flat-square)
 
-## Desktops
+## Desktop
 
-- [Berry]: healthy, byte-sized window manager written in C for unix systems;
-  - [alacritty]: A cross-platform, OpenGL terminal emulator;
-  - [dunst]: Lightweight and customizable notification daemon;
-  - [lemonbar]: A featherweight, lemon-scented, bar based on xcb;
-  - [sxhkd]: Simple X hotkey daemon.
 - [i3]: tiling window manager, completely written from scratch;
-  - [alacritty]: A cross-platform, OpenGL terminal emulator;
+  - [compton]: A compositor for X11;
   - [dunst]: Lightweight and customizable notification daemon;
-  - [polybar]: A fast and easy-to-use status bar;
+  - [kitty]: A modern, hackable, featureful, OpenGL based terminal emulator;
+  - [mpv]: a free, open source, and cross-platform media player;
+  - [newsboat]: A fork of Newsbeuter, an RSS/Atom feed reader for the text console;
+  - [rbw]: Unofficial command line client for Bitwarden;
   - [rofi]: A window switcher, application launcher and dmenu replacement;
-  - [compton]: A compositor for X11.
+  - [zathura]: A highly customizable and functional PDF viewer.
 
 ## Technologies
 
 - [Nix] as package manager.
 - [Home Manager] to take care of my home directory on [NixOS] and non-NixOS.
-- [VSCode](https://code.visualstudio.com/) and [Neovim](https://neovim.io/) as code
-  editors.
+- [VSCode] and [Neovim] as code editors.
 
 ## Repository structure
 
-- `desktop`: DE and WM options;
+- `home`: [Home Manager] configuration;
 - `hosts`: hosts configurations;
-- `pkgs`: packages used in the system;
+- `modules`: [Nix Modules];
+- `overlay`: overlay for some packages;
 - `templates`: [Nix Flake] templates that I use to start new projects or package
   existing ones.
   - Run `nix flake init -t github:imgabe/dotfiles#templates.<template>` to
     use the templates. See the [default.nix file](./templates/default.nix) for a
     complete list of available templates.
+- `wallpapers`: my wallpaper collection;
 
-[NixOS]: https://nixos.org
-[Nix]: https://nixos.org
-[Home Manager]: https://github.com/nix-community/home-manager/
-[Nix Flake]: https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html
+<!-- variables -->
 
-[Berry]: https://berrywm.org/
-[i3]: https://i3wm.org/
+[i3]: <https://i3wm.org/>
 
-[alacritty]: https://github.com/alacritty/alacritty
-[dunst]: https://github.com/dunst-project/dunst
-[lemonbar]: https://github.com/LemonBoy/bar
-[sxhkd]: https://github.com/baskerville/sxhkd
-[polybar]: https://github.com/polybar/polybar
-[rofi]: https://github.com/davatorium/rofi
-[compton]: https://github.com/chjj/compton
+[compton]: <https://github.com/chjj/compton>
+[dunst]: <https://github.com/dunst-project/dunst>
+[kitty]: <https://github.com/kovidgoyal/kitty>
+[kitty]: <https://github.com/kovidgoyal/kitty>
+[mpv]: <https://mpv.io/>
+[newsboat]:<https://newsboat.org/>
+[rbw]: <https://crates.io/crates/rbw>
+[rofi]: <https://github.com/davatorium/rofi>
+[zathura]: <https://github.com/pwmt/zathura>
+
+[VsCode]: <https://code.visualstudio.com/>
+[Neovim]: <https://neovim.io/>
+
+[NixOS]: <https://nixos.org>
+[Nix]: <https://nixos.org>
+[Nix Overlays]: <https://nixos.wiki/wiki/Overlays>
+[Nix Modules]: <https://nixos.wiki/wiki/Module>
+[Nix Flake]: <https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html>
+[Home Manager]: <https://github.com/nix-community/home-manager/>
