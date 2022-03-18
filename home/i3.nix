@@ -16,7 +16,7 @@ in
     bars.top = {
       settings.theme = "gruvbox-dark";
 
-      icons = "awesome";
+      icons = "material-nf";
       blocks = [
         {
           block = "music";
@@ -134,25 +134,25 @@ in
 
             focusedWorkspace = {
               background = "#${colors.base02}";
-              border = "#${colors.base02}";
+              border = "#${colors.base0D}";
               text = "#${colors.base05}";
             };
 
             activeWorkspace = {
               background = "#${colors.base0D}";
-              border = "#${colors.base02}";
+              border = "#${colors.base0D}";
               text = "#${colors.base06}";
             };
 
             inactiveWorkspace = {
               background = "#${colors.base02}";
-              border = "#${colors.base0D}";
+              border = "#${colors.base02}";
               text = "#${colors.base06}";
             };
 
             urgentWorkspace = {
               background = "#${colors.base02}";
-              border = "#${colors.base02}";
+              border = "#${colors.base0D}";
               text = "#${colors.base05}";
             };
           };
