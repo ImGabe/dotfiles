@@ -10,7 +10,7 @@ My [NixOs] and [Home Manager] dotfiles.
 - [i3]: tiling window manager, completely written from scratch;
   - [compton]: A compositor for X11;
   - [dunst]: Lightweight and customizable notification daemon;
-  - [kitty]: A modern, hackable, featureful, OpenGL based terminal emulator;
+  - [wezterm]: A GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust;
   - [mpv]: a free, open source, and cross-platform media player;
   - [newsboat]: A fork of Newsbeuter, an RSS/Atom feed reader for the text console;
   - [rbw]: Unofficial command line client for Bitwarden;
@@ -42,8 +42,7 @@ My [NixOs] and [Home Manager] dotfiles.
 
 [compton]: <https://github.com/chjj/compton>
 [dunst]: <https://github.com/dunst-project/dunst>
-[kitty]: <https://github.com/kovidgoyal/kitty>
-[kitty]: <https://github.com/kovidgoyal/kitty>
+[wezterm]: <https://github.com/wez/wezterm>
 [mpv]: <https://mpv.io/>
 [newsboat]:<https://newsboat.org/>
 [rbw]: <https://crates.io/crates/rbw>
