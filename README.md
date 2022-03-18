@@ -33,8 +33,8 @@ My [NixOs] and [Home Manager] dotfiles.
   existing ones.
   - Run `nix flake init -t github:imgabe/dotfiles#templates.<template>` to
     use the templates. See the [default.nix file](./templates/default.nix) for a
-    complete list of available templates.
-- `wallpapers`: my wallpaper collection;
+    complete list of available templates;
+- `wallpapers`: my wallpaper collection.
 
 <!-- variables -->
 

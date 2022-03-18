@@ -1,9 +1,9 @@
 {
-  description = "Development environment";
+  description = "Elixir development environment";
 
   inputs = {
-    nixpkgs = { url = "github:NixOS/nixpkgs/nixpkgs-unstable"; };
-    flake-utils = { url = "github:numtide/flake-utils"; };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, nixpkgs, flake-utils }:
@@ -17,11 +17,12 @@
         locales = pkgs.glibcLocales;
       in
       {
-        devShell = pkgs.mkShell {
-          buildInputs = [
-            elixir
-            locales
-          ]
-            }
-            });
-        }
+        devShell = pkgs.mkShell
+          {
+            buildInputs = [
+              elixir
+              locales
+            ];
+          };
+      });
+}

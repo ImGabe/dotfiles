@@ -83,10 +83,46 @@ in
 
       keybindings = lib.mkOptionDefault {
         "${mod}+d" = "exec rofi -modi drun -show drun";
-        "${mod}+Return" = "exec kitty";
+        "${mod}+Return" = "exec wezterm";
         "${mod}+Shift+s" = "exec sh -c 'maim -s | xclip -selection clipboard -t image/png'";
         "${mod}+Shift+l" = "exec sh -c '${pkgs.i3lock}/bin/i3lock -c 222222 & sleep 5 && xset dpms force of'";
       };
+
+      # border
+      colors = {
+        focused = {
+          background = "#${colors.base02}";
+          border = "#${colors.base02}";
+          text = "#${colors.base02}";
+          childBorder = "#${colors.base02}";
+          indicator = "#${colors.base02}";
+        };
+
+        # focusedInactive = {
+        #   background = "#${colors.base02}";
+        #   border = "${colors.base0D}";
+        #   text = "${colors.base06}";
+        # };
+
+        # placeholder = {
+        #   background = "#${colors.base0D}";
+        #   border = "${colors.base02}";
+        #   text = "${colors.base06}";
+        # };
+
+        # unfocused = {
+        #   background = "#${colors.base02}";
+        #   border = "${colors.base02}";
+        #   text = "${colors.base05}";
+        # };
+
+        # urgent = {
+        #   background = "#${colors.base02}";
+        #   border = "${colors.base02}";
+        #   text = "${colors.base05}";
+        # };
+      };
+
 
       bars = [
         {
@@ -98,26 +134,26 @@ in
 
             focusedWorkspace = {
               background = "#${colors.base02}";
-              border = "${colors.base02}";
-              text = "${colors.base05}";
+              border = "#${colors.base02}";
+              text = "#${colors.base05}";
             };
 
             activeWorkspace = {
               background = "#${colors.base0D}";
-              border = "${colors.base02}";
-              text = "${colors.base06}";
+              border = "#${colors.base02}";
+              text = "#${colors.base06}";
             };
 
             inactiveWorkspace = {
               background = "#${colors.base02}";
-              border = "${colors.base0D}";
-              text = "${colors.base06}";
+              border = "#${colors.base0D}";
+              text = "#${colors.base06}";
             };
 
             urgentWorkspace = {
               background = "#${colors.base02}";
-              border = "${colors.base02}";
-              text = "${colors.base05}";
+              border = "#${colors.base02}";
+              text = "#${colors.base05}";
             };
           };
 

@@ -11,7 +11,8 @@
       ./home/firefox.nix
       ./home/git.nix
       ./home/i3.nix
-      ./home/kitty.nix
+      # ./home/kitty.nix
+      ./home/wezterm.nix
       ./home/newsboat.nix
       ./home/nvim.nix
       ./home/rbw.nix
@@ -35,6 +36,8 @@
       krita
       steam
       spotify
+      spotify-tui
+      sptlrx
       zathura
 
       # online chat

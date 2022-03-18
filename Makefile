@@ -1,2 +1,2 @@
 nixos:
-	sudo nixos-rebuild switch --flake '.#desktop'
+	sudo nixos-rebuild --impure switch --flake '.#desktop'

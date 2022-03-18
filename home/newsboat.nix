@@ -16,7 +16,7 @@ in
 
       # Aggregators
       {
-        title = "Lobste.rs - Nix/Go";
+        title = "Lobste.rs - Nix/Go/Rust";
         url = "https://lobste.rs/t/nix,rust,go.rss";
         tags = [ "tech" "go" "rust" "nix" ];
       }
@@ -26,7 +26,7 @@ in
         tags = [ "tech" ];
       }
       {
-        title = "Hacker News - Frontpage";
+        title = "Hacker News - Go/Rust";
         url = "https://hnrss.org/newest?q=rust+OR+go";
         tags = [ "tech" "go" "rust" ];
       }

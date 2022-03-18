@@ -105,6 +105,11 @@
   # Enable suport for 32 bits.
   hardware.opengl.driSupport32Bit = true;
 
+  # For "Obsidian".
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-13.6.9"
+  ];
+
   xdg.mime = {
     enable = true;
     defaultApplications = {

@@ -12,6 +12,6 @@
       options = "--delete-older-than 2d";
     };
 
-    autoOptimiseStore = true;
+    settings.auto-optimise-store = true;
   };
 }
