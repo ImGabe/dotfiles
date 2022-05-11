@@ -1,48 +1,103 @@
 {
-  description = "My NixOS configuration";
+  description = "My personal Nix/Os configuration";
 
   inputs = {
-    # Utilities for building flakes
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    stable.url = "github:nixos/nixpkgs/nixos-21.11";
+
     utils.url = "github:numtide/flake-utils";
 
-    # Core nix flakes
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # hardware.url = "github:nixos/nixos-hardware";
+    homeManager.inputs.nixpkgs.follows = "unstable";
+    homeManager.url = "github:nix-community/home-manager";
 
-    # Home manager flake
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-generators.inputs.nixpkgs.follows = "unstable";
+    nixos-generators.url = "github:nix-community/nixos-generators";
 
-    # Extra community flakes
-    nix-colors.url = "github:misterio77/nix-colors";
+    hardware.url = "github:nixos/nixos-hardware";
+    nixColors.url = "github:misterio77/nix-colors";
     nur.url = "github:nix-community/nur";
   };
 
-  outputs =
-    { self
-    , home-manager
-    , nixpkgs
-    , nur
-    , nix-colors
-    , ...
-    }@inputs: {
+  outputs = { ... } @inputs:
+    let prelude = import ./prelude inputs;
+    in
+    {
       # NixOS
       nixosConfigurations = {
-        # Desktop
-        desktop = nixpkgs.lib.nixosSystem rec {
+        gxbe = prelude.mkSystem {
+          host = "gxbe";
           system = "x86_64-linux";
-          modules = [
-            { nixpkgs.overlays = [ nur.overlay (import ./overlay) ]; }
+          username = "gabe";
 
-            ./hosts/nixos/configuration.nix
-            ./home.nix
+          nixosModules = [
+            ./modules/meta.nix
 
-            home-manager.nixosModules.home-manager
+            ./nixos/git.nix
+            ./nixos/nix.nix
+            ./nixos/user.nix
+
+            ./hosts/gxbe/hardware-configuration.nix
           ];
-          specialArgs = { inherit inputs system; };
+
+          homeModules = [
+            ./home/bash.nix
+            ./home/chromium.nix
+            ./home/email.nix
+            ./home/firefox.nix
+            ./home/git.nix
+            ./home/i3.nix
+            ./home/newsboat.nix
+            ./home/nvim.nix
+            ./home/gui.nix
+            ./home/home.nix
+            ./home/rbw.nix
+            ./home/starship.nix
+            ./home/vscode.nix
+            ./home/wezterm.nix
+
+            ./modules/meta.nix
+
+            inputs.nixColors.homeManagerModule
+          ];
         };
+
+        # rpi4 = prelude.mkEmulator {
+        #   host = "rpi4";
+        #   system = "aarch64-linux";
+        #   format = "sd-aarch64-installer";
+
+        #   emulatorModules = [
+        #     ./hosts/rpi4
+        #   ];
+        # };
       };
 
+      packages.x86_64-linux.rpi4 = inputs.nixos-generators.nixosGenerate {
+        pkgs = inputs.unstable.legacyPackages.x86_64-linux;
+        modules = [
+          ./modules/meta.nix
+
+          ./nixos/git.nix
+          ./nixos/nix.nix
+          ./nixos/user.nix
+
+          ./hosts/rpi4
+        ];
+        format = "sd-aarch64-installer";
+      };
+
+
       templates = import ./templates;
-    };
+    } // inputs.utils.lib.eachDefaultSystem (system:
+      let pkgs = prelude.mkNixpkgs { inherit system; };
+      in
+      {
+        devShell = with pkgs; mkShell {
+          buildInputs = [
+            nixpkgs-fmt
+            rnix-lsp
+          ];
+        };
+      }
+    );
 }

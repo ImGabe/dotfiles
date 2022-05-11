@@ -1,20 +1,24 @@
-{ lib, pkgs, config, ... }:
+{ config, pkgs, inputs, lib, ... }:
+
+
 
 let
+  inherit (config.colorscheme) colors slug;
+  inherit (builtins) head split;
+
   mod = "Mod4";
-  colors = config.colorscheme.colors;
+  theme = head (split "-medium" slug);
 in
 {
-
   programs.rofi = {
     enable = true;
-    theme = "gruvbox-dark";
+    theme = theme;
   };
 
   programs.i3status-rust = {
     enable = true;
     bars.top = {
-      settings.theme = "gruvbox-dark";
+      settings.theme = theme;
 
       icons = "material-nf";
       blocks = [

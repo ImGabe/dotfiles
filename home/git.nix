@@ -1,22 +1,14 @@
+{ config, pkgs, ... }:
+
+let
+  inherit (config.meta) email name;
+in
 {
   programs.git = {
     enable = true;
+    package = pkgs.gitFull;
 
-    userName = "ImGabe";
-    userEmail = "gabrielpmonte@hotmail.com";
-
-    delta = {
-      enable = true;
-      options = {
-        features = "side-by-side line-numbers decorations";
-        delta = {
-          navigate = true;
-        };
-        line-numbers = {
-          line-numbers-minus-style = 124;
-          line-numbers-plus-style = 28;
-        };
-      };
-    };
+    userName = name;
+    userEmail = email;
   };
 }

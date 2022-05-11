@@ -1,5 +1,9 @@
-{ pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
+let
+  inherit (inputs) nixColors;
+  inherit (nixColors.lib { inherit pkgs; }) vimThemeFromScheme;
+in
 {
   programs.neovim = {
     enable = true;
@@ -12,31 +16,12 @@
     withRuby = true;
 
     plugins = with pkgs.vimPlugins; [
-      #themes
-      gruvbox
-
-      # air line
-      vim-airline
-      vim-airline-clock
-      vim-airline-themes
-
-      # nerdtree
-      nerdtree
-      nerdtree-git-plugin
-
-      # golang
-      vim-go
-      deoplete-go
-
-      # 
-      telescope-nvim
-      vim-polyglot
-
-      # nix language
-      vim-nix
-
-      # others
-      vimade
+      {
+        plugin = vimThemeFromScheme { scheme = config.colorscheme; };
+        config = "colorscheme nix-${config.colorscheme.slug}";
+      }
+      { plugin = telescope-nvim; }
+      { plugin = vim-polyglot; }
     ];
 
     extraConfig = ''
@@ -46,11 +31,11 @@
       " show relative numbers
       set relativenumber
 
-      " color scheme
-      colorscheme gruvbox
-
       " show column ruler
       set colorcolumn=80
+
+      " using system clipboard
+      set clipboard=unnamedplus
 
       " space as leader key
       nnoremap <space> <nop>
