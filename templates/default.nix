@@ -5,22 +5,34 @@
     path = ./basic;
   };
 
+  # nix flake init -t github:imgabe/dotfiles#templates.elm
+  c = {
+    description = "Go Project Template";
+    path = ./c;
+  };
+
   # nix flake init -t github:imgabe/dotfiles#templates.compat
   compat = {
     description = "Go Project Template";
-    path = ./go;
+    path = ./compat;
   };
 
   # nix flake init -t github:imgabe/dotfiles#templates.elm
   elm = {
     description = "Go Project Template";
-    path = ./go;
+    path = ./elm;
   };
 
   # nix flake init -t github:imgabe/dotfiles#templates.go
   go = {
     description = "Go Project Template";
     path = ./go;
+  };
+
+
+  python = {
+    description = "Python Project template";
+    path = ./python;
   };
 
   # nix flake init -t github:imgabe/dotfiles#templates.rust

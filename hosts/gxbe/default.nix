@@ -4,9 +4,7 @@
   imports = [
     ./grub/themes/fallout.nix
 
-    ./services/picom.nix
     ./services/priting.nix
-    ./services/redshift.nix
     ./services/wacom.nix
 
     ./hardware-configuration.nix
@@ -49,31 +47,19 @@
     noto-fonts-emoji
 
     hasklig
-    liberation_ttf
-    mplus-outline-fonts
   ];
 
   # Enable unfree packages.
   nixpkgs.config.allowUnfree = true;
 
-  # enable i3
-  services.xserver = {
-    enable = true;
+  # Set Gnome to DE
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
-    videoDrivers = [ "nvidia" ];
-
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-    };
-
-    displayManager = {
-      lightdm.enable = true;
-      defaultSession = "none+i3";
-    };
-
-    desktopManager.xterm.enable = false;
-  };
+  # Nvidia
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   # Configure keymap in X11.
   services.xserver.layout = "br";
@@ -110,18 +96,7 @@
     docker.enable = true;
     libvirtd.enable = true;
   };
-  users.users.gabe.extraGroups = [ "docker" "adbusers"];
-
-  # Enable emulation
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  xdg.mime = {
-    enable = true;
-    defaultApplications = {
-      "application/pdf" = "org.pwmt.zathura.desktop";
-      "image/png" = "feh.desktop";
-    };
-  };
+  users.users.gabe.extraGroups = [ "docker" "adbusers" ];
 
   # System version.
   system.stateVersion = "22.05";

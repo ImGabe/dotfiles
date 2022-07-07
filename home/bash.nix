@@ -1,9 +1,6 @@
 {
   programs.bash = {
     enable = true;
-    bashrcExtra = ''
-      eval "$(starship init bash)"
-    '';
 
     shellAliases = {
       "cat" = "bat";

@@ -7,15 +7,10 @@ My [NixOs] and [Home Manager] dotfiles.
 
 ## Desktop
 
-- [i3]: tiling window manager, completely written from scratch;
-  - [compton]: A compositor for X11;
-  - [dunst]: Lightweight and customizable notification daemon;
-  - [wezterm]: A GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust;
-  - [mpv]: a free, open source, and cross-platform media player;
-  - [newsboat]: A fork of Newsbeuter, an RSS/Atom feed reader for the text console;
-  - [rbw]: Unofficial command line client for Bitwarden;
-  - [rofi]: A window switcher, application launcher and dmenu replacement;
-  - [zathura]: A highly customizable and functional PDF viewer.
+- [gnome]: Desktop environment that aims to be simple and easy to use;
+  - [kitty]: Cross-platform, fast, feature-rich, GPU based terminal;
+  - [vlc]: Cross-platform media player and streaming server;
+  - [rbw]: Unofficial command line client for Bitwarden.
 
 ## Technologies
 
@@ -37,17 +32,10 @@ My [NixOs] and [Home Manager] dotfiles.
 - `wallpapers`: my wallpaper collection.
 
 <!-- variables -->
-
-[i3]: <https://i3wm.org/>
-
-[compton]: <https://github.com/chjj/compton>
-[dunst]: <https://github.com/dunst-project/dunst>
-[wezterm]: <https://github.com/wez/wezterm>
-[mpv]: <https://mpv.io/>
-[newsboat]:<https://newsboat.org/>
+[gnome]: <https://wiki.gnome.org/>
+[kitty]: <https://github.com/kovidgoyal/kitty>
+[vlc]: <https://www.videolan.org/vlc>
 [rbw]: <https://crates.io/crates/rbw>
-[rofi]: <https://github.com/davatorium/rofi>
-[zathura]: <https://github.com/pwmt/zathura>
 
 [VsCode]: <https://code.visualstudio.com/>
 [Neovim]: <https://neovim.io/>

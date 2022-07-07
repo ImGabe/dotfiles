@@ -13,12 +13,12 @@
       in
       {
         devShell = with pkgs; mkShell {
-          buildInputs = [
-            elmPackages.elm
-            elmPackages.elm-test
-            elmPackages.elm-format
-            elmPackages.elm-analyse
-            elmPackages.elm-language-server
+          buildInputs = with elmPackages; [
+            elm
+            elm-test
+            elm-format
+            elm-analyse
+            elm-language-server
           ];
         };
       });

@@ -15,7 +15,8 @@
       # font
       "editor.fontSize" = 14;
       "editor.fontLigatures" = true;
-      "editor.fontFamily" = "Hasklug Nerd Font";
+      "editor.fontFamily" = "JetBrains Mono";
+      "terminal.integrated.fontFamily" = "JetBrains Mono";
 
       # smooth
       "editor.cursorBlinking" = "phase";
@@ -26,9 +27,6 @@
       "editor.bracketPairColorization.enabled" = true;
       "editor.guides.bracketPairs" = "active";
 
-      # terminal font
-      "terminal.integrated.fontFamily" = "hasklig";
-
       # tree indent
       "workbench.tree.indent" = 15;
 
@@ -37,18 +35,11 @@
 
       "workbench.colorTheme" = "Gruvbox Dark Medium";
       "workbench.iconTheme" = "file-icons";
-
-      # Nix
-      "nix.enableLanguageServer" = true;
-      "[nix]" = {
-        "editor.tabSize" = 2;
-        "editor.insertSpaces" = true;
-      };
     };
 
     extensions = with pkgs.vscode-extensions; [
       ## Themes
-      # arcticicestudio.nord-visual-studio-code
+      jdinhlife.gruvbox
 
       ## Icons
       file-icons.file-icons
@@ -64,29 +55,15 @@
 
       ## Rust
       matklad.rust-analyzer
-      vadimcn.vscode-lldb # debug
 
       ## Markdown
       yzhang.markdown-all-in-one
-
-      ## csharp
-      ms-dotnettools.csharp
-
-      ## rescript
-      chenglou92.rescript-vscode
-
-      ## copilot
-      github.copilot
-
-      ## tabnine
-      tabnine.tabnine-vscode
 
       ## haskell
       haskell.haskell
       justusadam.language-haskell
 
       ## Misc
-      eamodio.gitlens
       editorconfig.editorconfig
       esbenp.prettier-vscode
       usernamehw.errorlens
