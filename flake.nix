@@ -1,63 +1,50 @@
 {
-  description = "My personal Nix/Os configuration";
+  description = "Dotfiles.";
 
   inputs = {
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:nixos/nixpkgs/nixos-22.05";
+    # Nixpkgs
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
 
-    utils.url = "github:numtide/flake-utils";
+    # Home manager
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    homeManager.inputs.nixpkgs.follows = "unstable";
-    homeManager.url = "github:nix-community/home-manager";
+    # Nix User Repository
+    nur.url = github:nix-community/NUR;
 
-    nixos-generators.inputs.nixpkgs.follows = "unstable";
-    nixos-generators.url = "github:nix-community/nixos-generators";
-
+    # Hardware
     hardware.url = "github:nixos/nixos-hardware";
-    nixColors.url = "github:misterio77/nix-colors";
-    nur.url = "github:nix-community/nur";
   };
 
-  outputs = { ... } @inputs:
-    let prelude = import ./prelude inputs;
-    in
-    {
-      # NixOS
-      nixosConfigurations = {
-        gxbe = prelude.mkSystem {
-          host = "gxbe";
-          system = "x86_64-linux";
-          username = "gabe";
+  outputs = { nixpkgs, home-manager, nur, hardware, ... }@inputs: {
+    # NixOS configuration entrypoint
+    # Available through 'nixos-rebuild --flake .#nixos'
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./nixos/configuration.nix
 
-          nixosModules = [
-            ./modules/meta.nix
-
-            ./nixos/git.nix
-            ./nixos/nix.nix
-            ./nixos/user.nix
-
-            ./hosts/gxbe/hardware-configuration.nix
-          ];
-
-          homeModules = [
-            ./home/bash.nix
-            ./home/firefox.nix
-            ./home/git.nix
-            ./home/gui.nix
-            ./home/home.nix
-            ./home/kitty.nix
-            ./home/nvim.nix
-            ./home/rbw.nix
-            ./home/vscode.nix
-
-            ./modules/meta.nix
-
-            inputs.nixColors.homeManagerModule
-          ];
-        };
-
+          hardware.nixosModules.common-cpu-amd
+          hardware.nixosModules.common-gpu-amd
+          hardware.nixosModules.common-pc-ssd
+        ];
       };
-
-      templates = import ./templates;
     };
+
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#gabe@nixos'
+    homeConfigurations = {
+      "gabe@nixos" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules =
+          [
+            ./home-manager/home.nix
+
+            { imports = [ inputs.nur.hmModules.nur ]; }
+          ];
+      };
+    };
+  };
 }

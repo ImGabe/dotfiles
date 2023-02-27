@@ -3,6 +3,7 @@
 {
   programs.vscode = {
     enable = true;
+    package = pkgs.vscodium;
 
     userSettings = {
       "editor.minimap.enabled" = false;
@@ -58,10 +59,6 @@
 
       ## Markdown
       yzhang.markdown-all-in-one
-
-      ## haskell
-      haskell.haskell
-      justusadam.language-haskell
 
       ## Misc
       editorconfig.editorconfig

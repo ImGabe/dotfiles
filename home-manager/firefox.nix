@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   programs.firefox = {
@@ -26,17 +26,14 @@
         # Don't show bookmarks toolbar
         "browser.toolbars.bookmarks.visibility" = "never";
       };
-    };
 
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      https-everywhere
-      privacy-badger
-      decentraleyes
-      link-cleaner
-      octotree
-      multi-account-containers
-      ublock-origin
-      bitwarden
-    ];
+      extensions = with config.nur.repos.rycee.firefox-addons; [
+        privacy-badger
+        decentraleyes
+        link-cleaner
+        ublock-origin
+        bitwarden
+      ];
+    };
   };
 }
