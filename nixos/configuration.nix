@@ -58,12 +58,12 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  # Gnome
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-  };
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the Pantheon Desktop Environment.
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.pantheon.enable = true;
 
   # Console keymap.
   console.keyMap = "br-abnt2";

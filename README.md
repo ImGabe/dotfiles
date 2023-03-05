@@ -7,7 +7,7 @@ My [NixOs] and [Home Manager] dotfiles. Template from [nix-starter-configs].
 
 ## Desktop
 
-- [gnome]: Desktop environment that aims to be simple and easy to use;
+- Pantheon: is the desktop environment of elementary OS. It is written in Vala, using GTK 3 and Granite.
 
 ## Technologies
 
@@ -25,8 +25,6 @@ My [NixOs] and [Home Manager] dotfiles. Template from [nix-starter-configs].
 <!-- variables -->
 
 [nix-starter-configs]: <https://github.com/Misterio77/nix-starter-configs/>
-
-[gnome]: <https://wiki.gnome.org/>
 
 [VsCodium]: <https://vscodium.com/>
 [Neovim]: <https://neovim.io/>
