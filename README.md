@@ -15,8 +15,6 @@ My [NixOs] and [Home Manager] dotfiles. Template from [nix-starter-configs].
 - [Home Manager] to take care of my home directory on [NixOS] and non-NixOS.
 - [VSCodium] and [Neovim] as code editors.
 - [Firefox] as browser.
-- [Discord] ...
-- [Spotify] ...
 
 ## Repository structure
 
