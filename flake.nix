@@ -42,7 +42,9 @@
           [
             ./home-manager/home.nix
 
-            { imports = [ inputs.nur.hmModules.nur ]; }
+            {
+              imports = [ inputs.nur.hmModules.nur ];
+            }
           ];
       };
     };

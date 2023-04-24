@@ -15,14 +15,19 @@
     };
   };
 
-  home = {
-    username = "gabe";
-    homeDirectory = "/home/gabe";
-  };
+  home =
+    {
+      username = "gabe";
+      homeDirectory = "/home/gabe";
+    };
 
   home.packages = with pkgs; [
     discord
     spotify
+    stremio
+    obsidian
+    insomnia
+
     nixpkgs-fmt
   ];
 

@@ -87,13 +87,16 @@
     jetbrains-mono
   ];
 
+  # Docker
+  virtualisation.docker.enable = true;
+
   # Users.
   users.users = {
     gabe = {
       initialPassword = "foobar";
       isNormalUser = true;
       description = "Gabriel Pereira Monte";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
     };
   };
 

@@ -1,4 +1,4 @@
-# dotfiles
+# Dotfiles
 
 My [NixOs] and [Home Manager] dotfiles. Template from [nix-starter-configs].
 
