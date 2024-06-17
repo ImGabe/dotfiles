@@ -3,25 +3,28 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
 
     userSettings = {
+      "update.mode" = "none";
       "editor.minimap.enabled" = false;
 
       # auto update tags when edited
       "editor.linkedEditing" = true;
-      "editor.rulers" = [ 80 120 ];
+      "editor.rulers" = [
+        80
+        120
+      ];
       "editor.formatOnSave" = true;
 
       # font
-      "editor.fontSize" = 14;
+      "editor.fontSize" = 16;
       "editor.fontLigatures" = true;
-      "editor.fontFamily" = "JetBrains Mono";
+      "editor.fontFamily" = "JetBrainsMono Nerd Font Mono";
       "terminal.integrated.fontFamily" = "JetBrains Mono";
 
       # smooth
       "editor.cursorBlinking" = "phase";
-      "editor.cursorSmoothCaretAnimation" = true;
+      "editor.cursorSmoothCaretAnimation" = "on";
       "editor.smoothScrolling" = true;
 
       # bracket
@@ -34,33 +37,38 @@
       "window.menuBarVisibility" = "toggle";
       "window.titleBarStyle" = "custom";
 
-      "workbench.colorTheme" = "Gruvbox Dark Medium";
-      "workbench.iconTheme" = "file-icons";
+      "workbench.colorTheme" = "Solarized Light";
+
+      "workbench.sideBar.location" = "right";
+
+      "editor.semanticHighlighting.enabled" = true;
+      "terminal.integrated.minimumContrastRatio" = 1;
+
+      "gopls.ui.semanticTokens" = true;
     };
 
     extensions = with pkgs.vscode-extensions; [
-      ## Themes
-      jdinhlife.gruvbox
-
-      ## Icons
-      file-icons.file-icons
-
       ## Git
       eamodio.gitlens
 
       ## Nix
       jnoortheen.nix-ide
 
+      ## C/C++
+      ms-vscode.cpptools
+
       ## Go
       golang.go
 
       ## Rust
-      matklad.rust-analyzer
+      rust-lang.rust-analyzer
+      tamasfe.even-better-toml
 
       ## Markdown
       yzhang.markdown-all-in-one
 
       ## Misc
+      mkhl.direnv
       editorconfig.editorconfig
       esbenp.prettier-vscode
       usernamehw.errorlens

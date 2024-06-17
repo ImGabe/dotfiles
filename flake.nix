@@ -3,50 +3,50 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # Home-manager
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Nix User Repository
-    nur.url = github:nix-community/NUR;
+    nur.url = "github:nix-community/NUR";
+
+    # alacritty
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
 
     # Hardware
     hardware.url = "github:nixos/nixos-hardware";
+
+    swayfx = {
+      url = "github:WillPower3309/swayfx";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nur, hardware, ... }@inputs: {
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#nixos'
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./nixos/configuration.nix
-
-          hardware.nixosModules.common-cpu-amd
-          hardware.nixosModules.common-gpu-amd
-          hardware.nixosModules.common-pc-ssd
-        ];
+  outputs =
+    { self
+    , nixpkgs
+    , home-manager
+    , ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+    in
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+        modules = [ ./nixos/configuration.nix ];
       };
-    };
 
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#gabe@nixos'
-    homeConfigurations = {
-      "gabe@nixos" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."gabe@nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit inputs; };
-        modules =
-          [
-            ./home-manager/home.nix
-
-            {
-              imports = [ inputs.nur.hmModules.nur ];
-            }
-          ];
+        extraSpecialArgs = { inherit inputs outputs; };
+        modules = [ ./home-manager/home.nix ];
       };
+
+      templates = ./templates;
     };
-  };
 }

@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-
+{ pkgs, ... }:
 
 {
   programs.git = {
@@ -8,5 +7,7 @@
 
     userName = "Gabriel Pereira Monte";
     userEmail = "gabrielpmonte@hotmail.com";
+
+    extraConfig.init.defaultBranch = "main";
   };
 }
