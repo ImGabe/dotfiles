@@ -14,16 +14,10 @@
     # Nix User Repository
     nur.url = "github:nix-community/NUR";
 
-    # alacritty
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
-
     # Hardware
     hardware.url = "github:nixos/nixos-hardware";
 
-    swayfx = {
-      url = "github:WillPower3309/swayfx";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixvim.url = "github:imgabe/nixvim";
   };
 
   outputs =
@@ -50,3 +44,4 @@
       templates = ./templates;
     };
 }
+

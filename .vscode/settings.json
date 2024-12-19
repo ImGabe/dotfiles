@@ -1,9 +1,14 @@
 {
     "editor.formatOnSave": true,
-    "[nix]": {
-        "editor.defaultFormatter": "jnoortheen.nix-ide"
-    },
     "nix.enableLanguageServer": true,
-    "nixEnvSelector.nixFile": "${workspaceRoot}/flake.nix",
     "nix.serverPath": "nixd",
+    "nix.serverSettings": {
+        "nixd": {
+            "formatting": {
+                "command": [
+                    "nixpkgs-fmt"
+                ]
+            },
+        }
+    },
 }

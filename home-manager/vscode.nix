@@ -10,10 +10,7 @@
 
       # auto update tags when edited
       "editor.linkedEditing" = true;
-      "editor.rulers" = [
-        80
-        120
-      ];
+      "editor.rulers" = [ 80 120 ];
       "editor.formatOnSave" = true;
 
       # font
@@ -37,14 +34,10 @@
       "window.menuBarVisibility" = "toggle";
       "window.titleBarStyle" = "custom";
 
-      "workbench.colorTheme" = "Solarized Light";
-
       "workbench.sideBar.location" = "right";
 
       "editor.semanticHighlighting.enabled" = true;
       "terminal.integrated.minimumContrastRatio" = 1;
-
-      "gopls.ui.semanticTokens" = true;
     };
 
     extensions = with pkgs.vscode-extensions; [
@@ -54,8 +47,8 @@
       ## Nix
       jnoortheen.nix-ide
 
-      ## C/C++
-      ms-vscode.cpptools
+      ## zig
+      ziglang.vscode-zig
 
       ## Go
       golang.go
@@ -68,6 +61,7 @@
       yzhang.markdown-all-in-one
 
       ## Misc
+      christian-kohler.path-intellisense
       mkhl.direnv
       editorconfig.editorconfig
       esbenp.prettier-vscode
