@@ -47,9 +47,6 @@
       ## Nix
       jnoortheen.nix-ide
 
-      ## zig
-      ziglang.vscode-zig
-
       ## Go
       golang.go
 

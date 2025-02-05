@@ -26,13 +26,12 @@
     checkConfig = true;
 
     optimise.automatic = true;
-    optimise.dates = [ "08:00" ];
 
-    # Garbage colletcor\
+    # Garbage collector
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 1w";
+      options = "--delete-older-than 3d";
     };
 
     settings = {
@@ -47,23 +46,25 @@
     trusted-users = root gabe
   '';
 
-  # Hostname.
+  # Hostname
   networking.hostName = "navi";
 
-  # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # Bootloader
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot/efi";
+  };
 
-  boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+  # secure boot 
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 
   boot.initrd.kernelModules = [ "amdgpu" ];
 
-  # Time zone.
+  # Time zone 
   time.timeZone = "America/Sao_Paulo";
   time.hardwareClockInLocalTime = true;
 
@@ -114,14 +115,14 @@
 
   programs.nix-ld.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    gnomeExtensions.appindicator
-    gnomeExtensions.docker
-    gnomeExtensions.wallhub
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.weather-or-not
+  environment.systemPackages = [
+    pkgs.gnomeExtensions.appindicator
+    pkgs.gnomeExtensions.docker
+    pkgs.gnomeExtensions.wallhub
+    pkgs.gnomeExtensions.blur-my-shell
+    pkgs.gnomeExtensions.weather-or-not
 
-    gnome-settings-daemon
+    pkgs.gnome-settings-daemon
   ];
 
   # Hardware Support
@@ -138,17 +139,10 @@
     ];
   };
 
-  # programs.steam = {
-  #   enable = true;
-  #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-  #   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  #   localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-  # };
-
-  # Console keymap.
+  # Console keymap
   console.keyMap = "br-abnt2";
 
-  # Enable CUPS to print documents.
+  # Enable CUPS to print documents
   services.printing.enable = true;
 
   services.avahi.enable = true;
@@ -156,8 +150,8 @@
   # for a WiFi printer
   services.avahi.openFirewall = true;
 
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  # Enable sound with pipewire
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -168,7 +162,7 @@
     wireplumber.enable = true;
   };
 
-  # Fonts.
+  # Fonts
   fonts.enableDefaultPackages = true;
 
   fonts.packages = with pkgs; [
@@ -188,25 +182,7 @@
   # Docker
   virtualisation.docker.enable = true;
 
-  services.postgresql = {
-    enable = true;
-    enableTCPIP = true;
-
-    ensureDatabases = [ "student" ];
-
-    authentication = pkgs.lib.mkOverride 10 ''
-      #type database DBuser auth-method
-      local all      all    trust
-      host  all      all    127.0.0.1/32   trust
-      host  all      all    ::1/128        trust
-    '';
-
-    initialScript = pkgs.writeText "backend-initScript" ''
-      CREATE ROLE gabe WITH LOGIN PASSWORD '123' CREATEDB;
-      CREATE DATABASE student;
-      GRANT ALL PRIVILEGES ON DATABASE gabe TO student;
-    '';
-  };
+  programs.adb.enable = true;
 
   # Users
   users.users = {
@@ -218,6 +194,7 @@
         "networkmanager"
         "wheel"
         "docker"
+        "adbusers"
       ];
     };
   };

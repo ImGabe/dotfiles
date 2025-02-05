@@ -23,14 +23,12 @@
         unfocused_hollow = true;
       };
 
-      shell.program = "fish";
+      terminal.shell.program = "fish";
 
       scrolling = {
         history = 10000;
         multiplier = 3;
       };
-
-      live_config_reload = true;
     };
   };
 }

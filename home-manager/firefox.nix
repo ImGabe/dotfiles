@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, ... }:
 
 {
   programs.firefox = {
@@ -87,7 +87,7 @@
 
       '';
 
-      extensions = with config.nur.repos.rycee.firefox-addons; [
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         privacy-badger
         decentraleyes
         link-cleaner

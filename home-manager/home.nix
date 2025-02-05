@@ -1,8 +1,8 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
-    # ./alacritty.nix
+    ./alacritty.nix
     ./bash.nix
     ./direnv.nix
     # ./emacs.nix
@@ -11,9 +11,7 @@
     ./git.nix
     ./starship.nix
     ./vscode.nix
-    ./rio.nix
-
-    inputs.nur.hmModules.nur
+    # ./rio.nix
   ];
 
   nixpkgs = {
@@ -27,11 +25,15 @@
   };
 
   home.packages = [
-    inputs.nixvim.packages.${pkgs.system}.default
+    # pkgs.nixvim
+    pkgs.chromium
+
+    # secure boot
+    pkgs.sbctl
 
     # IDEs
     pkgs.jetbrains.idea-ultimate
-    pkgs.jetbrains.pycharm-professional
+    pkgs.android-studio
 
     # desktop
     pkgs.discord
@@ -41,7 +43,7 @@
     pkgs.obsidian
     pkgs.spotify
     pkgs.thunderbird
-    pkgs.calibre
+    # pkgs.calibre
     pkgs.insomnia
     pkgs.libreoffice
 
@@ -74,11 +76,12 @@
     pkgs.bitwarden-cli
 
     # nix things
-    pkgs.nixpkgs-fmt
+    pkgs.nixfmt-rfc-style
     pkgs.nil
     pkgs.nixd
-    pkgs.devenv
     pkgs.nix-search-cli
+
+    pkgs.devenv
   ];
 
   # Enable home-manager
