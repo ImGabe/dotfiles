@@ -1,0 +1,3 @@
+{
+  programs.rio.enable = true;
+}

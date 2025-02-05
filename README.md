@@ -7,13 +7,7 @@ My [NixOs] and [Home Manager] dotfiles. Template from [nix-starter-configs].
 
 ## Desktop
 
-- sway (swayfx): An i3-compatible tiling Wayland compositor 
-  - waybar: Highly customizable Wayland bar for Sway and Wlroots based compositors
-  - swayidle: Idle management daemon for Wayland
-  - swaylock: Screen locker for Wayland
-  - swaync: Simple notification daemon with a GUI built for Sway
-  - wlsunset: Day/night gamma adjustments for Wayland
-  - fuzzel: Wayland-native application launcher, similar to rofi’s drun mode 
+- Gnome
 
 ## Technologies
 

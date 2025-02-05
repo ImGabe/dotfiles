@@ -1,14 +1,10 @@
-{ pkgs, ... }:
-
 {
   programs.alacritty = {
     enable = true;
 
-    settings.import = [ pkgs.alacritty-theme.solarized_dark ];
-
     settings = {
       window = {
-        dimensions = { columns = 120; lines = 30; };
+        dimensions = { columns = 60; lines = 15; };
         position = { x = 50; y = 50; };
         padding = { x = 10; y = 10; };
         dynamic_title = true;
@@ -27,14 +23,12 @@
         unfocused_hollow = true;
       };
 
-      shell.program = "fish";
+      terminal.shell.program = "fish";
 
       scrolling = {
         history = 10000;
         multiplier = 3;
       };
-
-      live_config_reload = true;
     };
   };
 }

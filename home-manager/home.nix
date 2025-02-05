@@ -1,35 +1,21 @@
-{ inputs
-, pkgs
-, ...
-}:
+{ pkgs, ... }:
 
 {
   imports = [
     ./alacritty.nix
-    ./calendar.nix
+    ./bash.nix
     ./direnv.nix
+    # ./emacs.nix
     ./firefox.nix
     ./fish.nix
-    ./fuzzel.nix
     ./git.nix
     ./starship.nix
-    ./sway.nix
-    ./swayidle.nix
-    ./swaylock.nix
-    ./swaync.nix
     ./vscode.nix
-    ./waybar.nix
-    ./wlsunset.nix
-
-    inputs.nur.hmModules.nur
+    # ./rio.nix
   ];
 
   nixpkgs = {
-    overlays = [
-      inputs.alacritty-theme.overlays.default
-      inputs.swayfx.overlays.insert
-    ];
-
+    overlays = [ ];
     config.allowUnfree = true;
   };
 
@@ -39,34 +25,63 @@
   };
 
   home.packages = [
-    pkgs.swayimg
-    pkgs.zathura
-    pkgs.swww
-    pkgs.kooha
-    pkgs.nwg-wrapper # funny!!
-    pkgs.neovim
+    # pkgs.nixvim
+    pkgs.chromium
 
-    pkgs.wl-clipboard
-    pkgs.playerctl
-    pkgs.pw-volume
+    # secure boot
+    pkgs.sbctl
 
-    pkgs.ansifilter # for calendar
+    # IDEs
+    pkgs.jetbrains.idea-ultimate
+    pkgs.android-studio
 
+    # desktop
     pkgs.discord
-    (pkgs.vesktop.override { withSystemVencord = false; })
+    pkgs.vesktop
 
-    pkgs.mpv
-    pkgs.stremio
     pkgs.tdesktop
-    pkgs.thunderbird
     pkgs.obsidian
     pkgs.spotify
-    pkgs.calibre
+    pkgs.thunderbird
+    # pkgs.calibre
+    pkgs.insomnia
+    pkgs.libreoffice
 
-    # nix format and lsp server
-    pkgs.nixpkgs-fmt
+    # media
+    pkgs.stremio
+    pkgs.ffmpeg
+    pkgs.vlc
+    pkgs.mpv
+    pkgs.imagemagick
+
+    # gnome apps
+    pkgs.eyedropper
+    pkgs.newsflash
+    pkgs.gnome-podcasts
+
+    # games
+    pkgs.prismlauncher
+
+    # redes
+    pkgs.tailscale
+
+    # commands/utils
+    pkgs.ripgrep
+    pkgs.fd
+    pkgs.bat
+    pkgs.zola
+
+    # passwords
+    pkgs.bitwarden
+    pkgs.bitwarden-cli
+
+    # nix things
+    pkgs.nixfmt-rfc-style
     pkgs.nil
     pkgs.nixd
+    pkgs.nix-search-cli
+
+    pkgs.devenv
   ];
 
   # Enable home-manager

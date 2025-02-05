@@ -1,9 +1,4 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}:
+{ inputs, lib, config, pkgs, ... }:
 
 {
   imports = [
@@ -16,7 +11,6 @@
 
   nixpkgs = {
     overlays = [ ];
-
     config.allowUnfree = true;
   };
 
@@ -29,14 +23,15 @@
     # Making legacy nix commands consistent as well, awesome!
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
-    optimise.automatic = true;
-    optimise.dates = [ "08:00" ];
+    checkConfig = true;
 
-    # Garbage colletcor\
+    optimise.automatic = true;
+
+    # Garbage collector
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 1w";
+      options = "--delete-older-than 3d";
     };
 
     settings = {
@@ -47,28 +42,40 @@
     };
   };
 
-  # Hostname.
-  networking.hostName = "nixos";
+  nix.extraOptions = ''
+    trusted-users = root gabe
+  '';
 
-  # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # Hostname
+  networking.hostName = "navi";
 
-  boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+  # Bootloader
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot/efi";
+  };
 
-  # Time zone.
+  # secure boot 
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
+
+  boot.initrd.kernelModules = [ "amdgpu" ];
+
+  # Time zone 
   time.timeZone = "America/Sao_Paulo";
   time.hardwareClockInLocalTime = true;
 
   # Firewall
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 57621 ]; # spotify
+    allowedTCPPorts = [
+      57621 # spotify 
+      65535 # minecraft
+      51413 # torrent
+    ];
   };
 
   # Internationalisation properties.
@@ -87,47 +94,55 @@
 
   security.polkit.enable = true;
 
-  xdg.portal = {
+  services.xserver = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gtk
-    ];
-
-    config.common.default = [
-      "wlr"
-      "gtk"
-    ];
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    videoDrivers = [ "amdgpu" ];
   };
 
-  security.pam.services.swaylock = {
-    text = "auth include login";
-  };
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    cheese # webcam tool
+    gnome-terminal
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    totem # video player
+    gnome-music
+  ]);
 
-  services.greetd = {
-    enable = true;
-    settings = rec {
-      initial_session = {
-        command = "${pkgs.sway}/bin/sway";
-        user = "gabe";
-      };
+  programs.nix-ld.enable = true;
 
-      default_session = initial_session;
-    };
-  };
+  environment.systemPackages = [
+    pkgs.gnomeExtensions.appindicator
+    pkgs.gnomeExtensions.docker
+    pkgs.gnomeExtensions.wallhub
+    pkgs.gnomeExtensions.blur-my-shell
+    pkgs.gnomeExtensions.weather-or-not
+
+    pkgs.gnome-settings-daemon
+  ];
 
   # Hardware Support
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
+    enable32Bit = true;
 
-    driSupport = true;
-    driSupport32Bit = true;
+    extraPackages = with pkgs;[
+      amdvlk
+    ];
+
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      driversi686Linux.amdvlk
+    ];
   };
 
-  # Console keymap.
+  # Console keymap
   console.keyMap = "br-abnt2";
 
-  # Enable CUPS to print documents.
+  # Enable CUPS to print documents
   services.printing.enable = true;
 
   services.avahi.enable = true;
@@ -135,34 +150,41 @@
   # for a WiFi printer
   services.avahi.openFirewall = true;
 
-  # Enable sound with pipewire.
+  # Enable sound with pipewire
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
   };
 
-  # Fonts.
+  # Fonts
+  fonts.enableDefaultPackages = true;
+
   fonts.packages = with pkgs; [
     jetbrains-mono
 
-    noto-fonts-color-emoji
     noto-fonts-emoji
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts
 
-    dejavu_fonts
-
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.jetbrains-mono
   ];
+
+  services.tailscale.enable = true;
 
   # Docker
   virtualisation.docker.enable = true;
 
-  # Users.
+  programs.adb.enable = true;
+
+  # Users
   users.users = {
     gabe = {
       initialPassword = "foobar";
@@ -172,6 +194,7 @@
         "networkmanager"
         "wheel"
         "docker"
+        "adbusers"
       ];
     };
   };

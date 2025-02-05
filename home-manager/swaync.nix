@@ -1,3 +1,0 @@
-{
-  services.swaync.enable = true;
-}
